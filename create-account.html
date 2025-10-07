@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Account - E-FootwearMarket</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css"><!-- reuse main stylesheet -->
+</head>
+<body class="auth-body">
+
+  <header class="site-header">
+    <div class="logo">E-FootwearMarket</div>
+    <form class="search-bar" action="#" method="get">
+      <input type="text" placeholder="Search footwear, brands, styles..." aria-label="Search">
+      <button type="submit">Search</button>
+    </form>
+    <nav class="main-nav" aria-label="Primary">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="navMenu">☰</button>
+      <ul id="navMenu">
+        <li><a href="deals.html">Today's Deals</a></li>
+        <li><a href="index.html">Shop</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a class="active" href="create-account.html">Create Account</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a href="#" class="cart-link">🛒 Cart</a>
+    </div>
+  </header>
+
+  <main class="auth-wrapper">
+    <section class="auth-card" aria-labelledby="createAccountHeading">
+      <h1 id="createAccountHeading">Create Your Account</h1>
+      <p class="auth-intro">Join us for exclusive deals, faster checkout, and order tracking.</p>
+
+      <form id="createAccountForm" novalidate>
+        <div class="field">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" autocomplete="name" required>
+          <div id="fullName-error" class="error-message" aria-live="polite"></div>
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" autocomplete="email" required>
+          <div id="email-error" class="error-message" aria-live="polite"></div>
+        </div>
+
+        <div class="field password-field">
+          <label for="password">Password</label>
+          <input type="password" id="password" minlength="6" required>
+          <div id="password-error" class="error-message" aria-live="polite"></div>
+        </div>
+
+        <div class="field">
+          <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" required>
+          <div id="confirmPassword-error" class="error-message" aria-live="polite"></div>
+        </div>
+
+        <button type="submit" class="auth-submit">Create Account</button>
+
+        <p class="auth-alt">Already have an account? <a href="login.html">Log in</a></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    © 2025 E-FootwearMarket. All rights reserved.
+  </footer>
+
+  <script>
+    // Basic front-end validation
+    document.getElementById('createAccountForm').addEventListener('submit', e => {
+      e.preventDefault();
+      let ok = true;
+      const name = fullName.value.trim();
+      const emailVal = email.value.trim();
+      const pass = password.value;
+      const cpass = confirmPassword.value;
+
+      fullNameError.textContent = "";
+      emailError.textContent = "";
+      passwordError.textContent = "";
+      confirmPasswordError.textContent = "";
+
+      if (name.length < 3) {
+        fullNameError.textContent = "Name must be at least 3 characters.";
+        ok = false;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+        emailError.textContent = "Enter a valid email.";
+        ok = false;
+      }
+      if (pass.length < 6) {
+        passwordError.textContent = "Minimum 6 characters.";
+        ok = false;
+      }
+      if (pass !== cpass) {
+        confirmPasswordError.textContent = "Passwords do not match.";
+        ok = false;
+      }
+      if (ok) {
+        alert("Account created (demo).");
+        e.target.reset();
+      }
+    });
+
+    const fullName = document.getElementById('fullName');
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('confirmPassword');
+    const fullNameError = document.getElementById('fullName-error');
+    const emailError = document.getElementById('email-error');
+    const passwordError = document.getElementById('password-error');
+    const confirmPasswordError = document.getElementById('confirmPassword-error');
+  </script>
+</body>
+</html>

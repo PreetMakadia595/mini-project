@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>E-FootwearMarket</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo">E-FootwearMarket</div>
+
+    <form class="search-bar" id="siteSearch" action="#">
+      <input type="text" name="q" placeholder="Search footwear, brands, styles..." aria-label="Search">
+      <button type="submit">Search</button>
+    </form>
+
+    <nav class="main-nav" aria-label="Primary">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="navMenu">☰</button>
+      <ul id="navMenu">
+        <li><a href="deals.html">Today's Deals</a></li>
+        <li><a href="products.html">Shop</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a href="cart.html" class="cart-link" aria-label="Cart">🛒 Cart <span class="cart-count" id="cartCount">0</span></a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-overlay">
+      <h1>Step Into Style</h1>
+      <p>Discover the latest trends and best deals in footwear for every occasion.<br>
+         Shop top brands, exclusive styles, and more!</p>
+    </div>
+  </section>
+
+  <section class="categories">
+    <a class="cat-btn" href="men.html" data-category="men">Men's Collection</a>
+    <a class="cat-btn" href="women.html" data-category="women">Women's Collection</a>
+    <a class="cat-btn" href="kids.html" data-category="kids">Kid's Collection</a>
+  </section>
+
+  <section class="featured">
+    <h2>Featured Picks</h2>
+    <div class="grid">
+      <div class="card" data-id="sprun01" data-name="Sport Runner" data-price="89.99">
+        <div class="img" role="img" aria-label="Sport Runner shoe"></div>
+        <h3>Sport Runner</h3>
+        <p>$89.99</p>
+        <button class="add-btn">Add to Cart</button>
+      </div>
+      <div class="card" data-id="clsnk02" data-name="Classic Sneaker" data-price="74.50">
+        <div class="img" role="img" aria-label="Classic Sneaker"></div>
+        <h3>Classic Sneaker</h3>
+        <p>$74.50</p>
+        <button class="add-btn">Add to Cart</button>
+      </div>
+      <div class="card" data-id="trlpro03" data-name="Trail Pro" data-price="110.00">
+        <div class="img" role="img" aria-label="Trail Pro shoe"></div>
+        <h3>Trail Pro</h3>
+        <p>$110.00</p>
+        <button class="add-btn">Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    © 2025 E-FootwearMarket. All rights reserved.
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

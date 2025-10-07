@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Today's Deals - E-FootwearMarket</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="logo">E-FootwearMarket</div>
+    <form class="search-bar" action="#" method="get">
+      <input type="text" name="q" placeholder="Search footwear, brands, styles..." aria-label="Search">
+      <button type="submit">Search</button>
+    </form>
+    <nav class="main-nav" aria-label="Primary">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="navMenu">☰</button>
+      <ul id="navMenu">
+        <li><a href="deals.html" class="active">Today's Deals</a></li>
+        <li><a href="index.html">Shop</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="size.html">Size</a></li>
+      </ul>
+    </nav>
+    
+  </header>
+
+  <main class="deals-wrapper">
+    <section class="deal-panel" aria-labelledby="dealsHeading">
+      <h1 id="dealsHeading">Today's Deals</h1>
+      <p class="deal-intro">Hurry! Limited time offers. Shop now and save big on your favorite footwear.</p>
+
+      <ul class="deal-list" role="list">
+        <li class="deal-item">
+          <span class="deal-badge">50% OFF</span>
+          <span class="deal-text">on selected Sneakers</span>
+        </li>
+        <li class="deal-item">
+          <span class="deal-badge">Buy 1 Get 1 Free</span>
+          <span class="deal-text">on Sandals</span>
+        </li>
+        <li class="deal-item">
+          <span class="deal-badge">30% OFF</span>
+          <span class="deal-text">on Sports Shoes</span>
+        </li>
+        <li class="deal-item">
+          <span class="deal-badge">Special Price</span>
+          <span class="deal-text">on Formal Shoes</span>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    © 2025 E-FootwearMarket. All rights reserved.
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

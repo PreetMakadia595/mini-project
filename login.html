@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - E-FootwearMarket</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="auth-body">
+
+  <header class="site-header">
+    <div class="logo">E-FootwearMarket</div>
+    <form class="search-bar" action="#" method="get">
+      <input type="text" placeholder="Search footwear, brands, styles..." aria-label="Search">
+      <button type="submit">Search</button>
+    </form>
+    <nav class="main-nav" aria-label="Primary">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="navMenu">☰</button>
+      <ul id="navMenu">
+        <li><a href="deals.html">Today's Deals</a></li>
+        <li><a href="index.html">Shop</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="create-account.html">Create Account</a></li>
+        <li><a class="active" href="login.html">Login</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a href="#" class="cart-link">🛒 Cart</a>
+    </div>
+  </header>
+
+  <main class="auth-wrapper">
+    <section class="auth-card login" aria-labelledby="loginHeading">
+      <h1 id="loginHeading">Welcome Back</h1>
+      <p class="auth-intro">Sign in to access your account, track orders, and view saved items.</p>
+
+      <form id="loginForm" novalidate>
+        <div class="field">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" autocomplete="email" required>
+          <div id="loginEmail-error" class="error-message" aria-live="polite"></div>
+        </div>
+
+        <div class="field">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" required minlength="6">
+          <div id="loginPassword-error" class="error-message" aria-live="polite"></div>
+        </div>
+
+        <div class="field-inline">
+          <label class="remember">
+            <input type="checkbox" id="rememberMe">
+            <span>Remember me</span>
+          </label>
+          <a class="forgot-link" href="forgot-password.html">Forgot Password?</a>
+        </div>
+
+        <button type="submit" class="auth-submit">Login</button>
+
+        <p class="auth-alt">New here? <a href="create-account.html">Create an account</a></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    © 2025 E-FootwearMarket. All rights reserved.
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const loginEmail = document.getElementById('loginEmail');
+    const loginPassword = document.getElementById('loginPassword');
+    const emailErr = document.getElementById('loginEmail-error');
+    const passErr = document.getElementById('loginPassword-error');
+
+    loginForm.addEventListener('submit', e => {
+      e.preventDefault();
+      emailErr.textContent = "";
+      passErr.textContent = "";
+      let ok = true;
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(loginEmail.value.trim())) {
+        emailErr.textContent = "Enter a valid email.";
+        ok = false;
+      }
+      if (loginPassword.value.length < 6) {
+        passErr.textContent = "Password too short.";
+        ok = false;
+      }
+      if (ok) {
+        alert("Logged in (demo).");
+        loginForm.reset();
+      }
+    });
+  </script>
+</body>
+</html>

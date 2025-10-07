@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Products - E-FootwearMarket</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo">E-FootwearMarket</div>
+    <form class="search-bar" id="productSearch" action="#">
+      <input type="text" name="q" id="searchInput" placeholder="Search products..." aria-label="Search products">
+      <button type="submit">Search</button>
+    </form>
+    <nav class="main-nav" aria-label="Primary">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="navMenu">☰</button>
+      <ul id="navMenu">
+        <li><a href="index.html">Home</a></li>
+        <li><a class="active" href="products.html">Shop</a></li>
+        <li><a href="deals.html">Deals</a></li>
+        <li><a href="men.html">Men</a></li>
+        <li><a href="women.html">Women</a></li>
+        <li><a href="kids.html">Kids</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a href="cart.html" class="cart-link">🛒 Cart <span class="cart-count" id="cartCount">0</span></a>
+    </div>
+  </header>
+
+  <main class="products-wrapper">
+    <section class="products-head">
+      <h1>All Products</h1>
+      <p class="products-sub">Browse our full footwear lineup. Use search or filter by tag.</p>
+
+      <div class="filter-bar">
+        <button class="prod-filter active" data-tag="all">All</button>
+        <button class="prod-filter" data-tag="sneaker">Sneakers</button>
+        <button class="prod-filter" data-tag="running">Running</button>
+        <button class="prod-filter" data-tag="boots">Boots</button>
+        <button class="prod-filter" data-tag="casual">Casual</button>
+        <button class="prod-filter" data-tag="kids">Kids</button>
+      </div>
+    </section>
+
+    <section>
+      <div id="productGrid" class="product-grid product-grid-all">
+        <!-- Items (can be generated) -->
+      </div>
+      <p id="noResults" class="no-results" hidden>No products match your search.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    © 2025 E-FootwearMarket. All rights reserved.
+  </footer>
+
+  <script>
+    // Basic dataset
+    const PRODUCTS = [
+      {id:"classic-snk", name:"Classic Sneakers", price:49.99, tag:["sneaker","casual"], img:"https://images.unsplash.com/photo-1521093470119-a3acdc43374a?auto=format&fit=crop&w=600&q=60"},
+      {id:"run-fast", name:"Running Shoes", price:59.99, tag:["running","sneaker"], img:"https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=600&q=60"},
+      {id:"leather-boot", name:"Leather Boots", price:89.99, tag:["boots"], img:"https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=600&q=60"},
+      {id:"flip-flops", name:"Flip Flops", price:19.99, tag:["casual"], img:"https://images.unsplash.com/photo-1582588678413-dbf45f4823e9?auto=format&fit=crop&w=600&q=60"},
+      {id:"kids-snk", name:"Kids' Sneakers", price:29.99, tag:["kids","sneaker"], img:"https://images.unsplash.com/photo-1602300900594-0036c5cb5f47?auto=format&fit=crop&w=600&q=60"},
+      {id:"trail-pro", name:"Trail Pro Runner", price:72.50, tag:["running"], img:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=60"},
+      {id:"urban-low", name:"Urban Low Tops", price:54.00, tag:["sneaker","casual"], img:"https://images.unsplash.com/photo-1519741491154-36a5ac3b2e86?auto=format&fit=crop&w=600&q=60"},
+      {id:"kid-rainbow", name:"Kid Rainbow Runners", price:25.50, tag:["kids","running"], img:"https://images.unsplash.com/photo-1608061692753-e0b4a9799149?auto=format&fit=crop&w=600&q=60"}
+    ];
+
+    const grid = document.getElementById('productGrid');
+    const noResults = document.getElementById('noResults');
+    const searchInput = document.getElementById('searchInput');
+    const cartCountEl = document.getElementById('cartCount');
+    const CART_KEY = 'efm_cart';
+
+    function getCart(){ try{return JSON.parse(localStorage.getItem(CART_KEY))||[]}catch{return[]}}
+    function saveCart(c){ localStorage.setItem(CART_KEY, JSON.stringify(c)); updateCartCount(); }
+    function updateCartCount(){ if(!cartCountEl) return; cartCountEl.textContent = getCart().reduce((s,i)=>s+i.qty,0); }
+
+    function addToCart(p){
+      const c = getCart();
+      const ex = c.find(x=>x.id===p.id);
+      if(ex) ex.qty++; else c.push({...p, qty:1});
+      saveCart(c);
+    }
+
+    function cardTemplate(p){
+      return `
+      <article class="product-card" data-id="${p.id}" data-tags="${p.tag.join(',')}">
+        <figure class="product-img">
+          <img src="${p.img}" alt="${p.name}">
+        </figure>
+        <h3 class="product-name">${p.name}</h3>
+        <p class="product-price">Rs ${p.price.toFixed(2)}</p>
+        <button class="add-cart-btn" data-add="${p.id}">Add to Cart</button>
+      </article>`;
+    }
+
+    function render(list){
+      grid.innerHTML = list.map(cardTemplate).join('');
+      list.length ? noResults.hidden = true : noResults.hidden = false;
+      grid.querySelectorAll('[data-add]').forEach(btn=>{
+        btn.addEventListener('click',()=>{
+          const p = PRODUCTS.find(x=>x.id===btn.dataset.add);
+          addToCart(p);
+        });
+      });
+    }
+
+    function filterProducts(){
+      const q = (searchInput.value||'').trim().toLowerCase();
+      const activeTagBtn = document.querySelector('.prod-filter.active');
+      const tag = activeTagBtn ? activeTagBtn.dataset.tag : 'all';
+      const list = PRODUCTS.filter(p=>{
+        const matchQ = !q || p.name.toLowerCase().includes(q);
+        const matchTag = tag==='all' || p.tag.includes(tag);
+        return matchQ && matchTag;
+      });
+      render(list);
+    }
+
+    // Tag filters
+    document.querySelectorAll('.prod-filter').forEach(b=>{
+      b.addEventListener('click',()=>{
+        document.querySelectorAll('.prod-filter').forEach(x=>x.classList.remove('active'));
+        b.classList.add('active');
+        filterProducts();
+      });
+    });
+
+    // Search submit + live typing
+    document.getElementById('productSearch')?.addEventListener('submit', e=>{ e.preventDefault(); filterProducts(); });
+    searchInput?.addEventListener('input', filterProducts);
+
+    // Support ?search= query from home
+    const params = new URLSearchParams(location.search);
+    if(params.get('search')){
+      searchInput.value = params.get('search');
+    }
+
+    render(PRODUCTS);
+    filterProducts();
+    updateCartCount();
+
+    // Mobile nav toggle (reuse)
+    document.querySelector('.nav-toggle')?.addEventListener('click',()=>{
+      const m = document.getElementById('navMenu');
+      const open = m.classList.toggle('open');
+      document.querySelector('.nav-toggle').setAttribute('aria-expanded', open);
+    });
+  </script>
+</body>
+</html>
